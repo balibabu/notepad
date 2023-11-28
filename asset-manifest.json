@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/notepad/static/js/main.5e4524a0.js",
+    "static/js/787.1d26515f.chunk.js": "/notepad/static/js/787.1d26515f.chunk.js",
+    "static/media/delete.png": "/notepad/static/media/delete.69701ebce57bb26eb5ba.png",
+    "index.html": "/notepad/index.html",
+    "main.5e4524a0.js.map": "/notepad/static/js/main.5e4524a0.js.map",
+    "787.1d26515f.chunk.js.map": "/notepad/static/js/787.1d26515f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5e4524a0.js"
+  ]
+}
