@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://babu1.pythonanywhere.com/api/notes';
+const BASE_URL = 'http://127.0.0.1:8000/api/notes';
 
 const getAllNotes = async () => {
   try {
