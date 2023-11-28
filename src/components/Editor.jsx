@@ -38,7 +38,7 @@ export default function Editor(props) {
             const note = await addNote(newNote);
             props.setData((data) => [...data, note])
             console.log('created');
-        } else if(props.note.title!=_title || props.note.description!=_description || props.note.color!=color) {
+        } else if(props.note.title !== _title || props.note.description !== _description || props.note.color !== color) {
             const isUpdated = await updateNote(props.note.id, newNote);
             if (isUpdated) {
                 props.setData((notes) => {

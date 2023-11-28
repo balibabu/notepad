@@ -13,7 +13,6 @@ function NotesList() {
         const fetchData = async () => {
             try {
                 const notes = await getAllNotes();
-                console.log(notes);
                 setData(notes);
             } catch (error) {
                 console.log(error);
