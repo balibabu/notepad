@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8000/api/notes/';
+const BASE_URL = 'https://babu1.pythonanywhere.com/api/notes';
 
 const getAllNotes = async () => {
   try {
@@ -25,10 +25,14 @@ const addNote = async (noteData) => {
 const updateNote = async (noteId, noteData) => {
   try {
     const response = await axios.put(`${BASE_URL}${noteId}/`, noteData);
-    return response.data;
+    if(response.status===200){
+      return true;
+    }else{
+      return false;
+    }
   } catch (error) {
     console.error('Error updating note:', error);
-    throw error;
+    return false;
   }
 };
 

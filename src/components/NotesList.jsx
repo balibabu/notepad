@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import Note from "./Note";
 import { deleteNote, getAllNotes } from "../services/noteServices";
-import CreateNote from "./CreateNote";
 import Editor from "./Editor";
 
 function NotesList() {
     const [data, setData] = useState([]);
     const [editorMode, setEditorMode] = useState(false);
-    let mode='create';
-    let saveNote=addNote;
+    const [mode, setMode] = useState('create');
+    const [note, setNote] = useState({title:"",description:"",color:"#96ffff"});
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const notes = await getAllNotes();
+                console.log(notes);
                 setData(notes);
             } catch (error) {
                 console.log(error);
@@ -22,12 +22,8 @@ function NotesList() {
         fetchData();
     }, [])
 
-    const addNote = (note) => {
-        setData((data) => [...data, note])
-        setEditorMode(false);
-    }
-
-    const delete_note = async (id) => {
+    const delete_note = async (event,id) => {
+        event.stopPropagation();
         const confirmDelete = window.confirm("Are you sure you want to delete this note?");
         if (!confirmDelete) { return; }
         try {
@@ -43,20 +39,32 @@ function NotesList() {
     };
 
 
+    const on_note_click=(note)=>{
+        setNote(note);
+        setMode('update')
+        setEditorMode(true);
+    }
+
+    const set_defaults=()=>{
+        setNote({title:"",description:"",color:"#96ffff"});
+        setMode('create');
+        setEditorMode(false);
+
+    }
+
 
     return (
         <>
             {editorMode ?
-                // <CreateNote setEditorMode={setEditorMode} addNote={addNote}/>
-                <Editor setEditorMode={setEditorMode} mode={mode}/>
+                <Editor setEditorMode={setEditorMode} mode={mode} note={note} set_defaults={set_defaults} setData={setData}/>
                 :
                 <>
                     <div>
-                        <button style={{ marginLeft: "10px" }} onClick={()=>setEditorMode(true)}>Create Note</button>
+                        <button style={floatingButtonStyle} onClick={()=>setEditorMode(true)}>Create Note</button>
                     </div>
                     <div>
                         {data.map((note) => {
-                            return <Note note={note} key={note.id} delete_note={delete_note} />
+                            return <Note note={note} key={note.id} delete_note={delete_note} on_note_click={on_note_click}/>
                         })}
                     </div>
                 </>
@@ -66,3 +74,21 @@ function NotesList() {
 }
 
 export default NotesList;
+
+
+
+
+
+const floatingButtonStyle={
+    position: 'fixed',
+    bottom: '20px', // Adjust as needed
+    right: '10px', // Adjust as needed
+    padding: '10px',
+    fontSize:"20px",
+    fontWeight: "bolder",
+    borderRadius: "50px",
+    border: "5px groove #0077b6",
+    backgroundColor:"#90e0ef",
+    boxShadow: "10px 0 10px rgba(255, 255, 255, 0.5)"
+
+  }
