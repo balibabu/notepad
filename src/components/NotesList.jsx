@@ -3,8 +3,9 @@ import Note from "./Note";
 import { deleteNote, getAllNotes } from "../services/noteServices";
 import Editor from "./Editor";
 
+const dummyData=[{id:0,title:"Example",description:"Example description",created_time:""},{id:1,title:"Example",description:"Example description",created_time:""}]
 function NotesList() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(dummyData);
     const [editorMode, setEditorMode] = useState(false);
     const [mode, setMode] = useState('create');
     const [note, setNote] = useState({title:"",description:"",color:"#96ffff"});
@@ -91,3 +92,5 @@ const floatingButtonStyle={
     boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)"
 
   }
+
+
