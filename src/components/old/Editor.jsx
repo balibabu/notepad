@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { addNote, updateNote } from '../services/noteServices';
+import { addNote, updateNote } from '../../services/noteServices';
+import { Button } from 'react-bootstrap';
 
 export default function Editor(props) {
     const noteStyle = {
@@ -13,17 +14,17 @@ export default function Editor(props) {
         fontSize: "20px",
         fontWeight: "bolder",
     }
-    const inputFieldStyle={
+    const inputFieldStyle = {
         fontWeight: "bolder",
         borderRadius: "10px",
         padding: '5px',
-        marginBottom:"15px",
+        marginBottom: "15px",
         border: "4px inset #588157",
 
     }
-    const buttonStyle={
+    const buttonStyle = {
         padding: '10px',
-        margin:"20px 10px 0 0 ",
+        margin: "20px 10px 0 0 ",
         fontWeight: "bolder",
         borderRadius: "15px",
         backgroundColor: "#90e0ef",
@@ -107,13 +108,13 @@ export default function Editor(props) {
         <div style={noteStyle}>
             <form onSubmit={onSubmit}>
                 <label style={labelStyle} htmlFor='title'>Title </label><br />
-                <input style={{...inputFieldStyle, width: '50vw',fontSize: "30px" }} id='title' value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input style={{ ...inputFieldStyle, width: '50vw', fontSize: "30px" }} id='title' value={title} onChange={(e) => setTitle(e.target.value)} />
                 <small> {255 - title.length} characters remaining</small><br />
                 <label style={labelStyle} htmlFor='description'>Description </label><br />
-                <textarea style={{...inputFieldStyle, width: '80vw' }} rows={10} id='description' value={description} onChange={(e) => setDescription(e.target.value)}
+                <textarea style={{ ...inputFieldStyle, width: '80vw' }} rows={10} id='description' value={description} onChange={(e) => setDescription(e.target.value)}
                 ></textarea><br />
                 <label style={labelStyle}>Pick a color : </label>
-                <input style={{borderRadius: "10px",border: "4px inset #588157",}} type="color" id="colorPicker" value={color} onChange={onColorChange} /><br />
+                <input style={{ borderRadius: "10px", border: "4px inset #588157", }} type="color" id="colorPicker" value={color} onChange={onColorChange} /><br />
                 <button style={buttonStyle} type="submit">save</button>
                 <button style={buttonStyle} onClick={() => props.set_defaults()}>cancel</button>
             </form>
