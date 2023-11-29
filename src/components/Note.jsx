@@ -24,14 +24,22 @@ export default function Note(props) {
     return (
         <div style={noteStyle} onClick={() => props.on_note_click(props.note)}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h2 style={{ padding: '0px', margin: '0' }}>{props.note.title.substr(0, 15)}</h2>
+                <h2 style={{ padding: '0px', margin: '0' }}>{shortenTexts(props.note.title,15)}</h2>
                 <button style={deleteButtonStyle} onClick={(event) => props.delete_note(event, props.note.id)}>
                     <img src={deleteImg} alt="Delete" style={deleteImageStyle} />
                 </button>
             </div>
-            <p style={{ margin: '5px 0px', height: '20px' }}>{props.note.description.substr(0, 40)}</p>
+            <p style={{ margin: '5px 0px', height: '20px' }}>{shortenTexts(props.note.description)}</p>
             <small style={{ color: 'grey' }}>{props.note.created_time}</small>
         </div>
 
     )
+}
+
+
+function shortenTexts(text,size=30){
+    if(text.length<=size){
+        return text;
+    }
+    return text.substr(0,size)+"...";
 }

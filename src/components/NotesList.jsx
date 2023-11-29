@@ -88,6 +88,6 @@ const floatingButtonStyle={
     borderRadius: "50px",
     border: "5px groove #0077b6",
     backgroundColor:"#90e0ef",
-    boxShadow: "10px 0 10px rgba(255, 255, 255, 0.5)"
+    boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)"
 
   }
