@@ -35,7 +35,6 @@ export default function Editor(props) {
     const [color, setColor] = useState(props.note.color);
 
 
-
     const onSubmit = async (event) => {
         event.preventDefault();
         let _title = title.trim()
@@ -55,22 +54,29 @@ export default function Editor(props) {
             description: _description,
             color: color
         };
+
         if (props.mode === 'create') {
-            const note = await addNote(newNote);
-            props.setData((data) => [...data, note])
-            console.log('created');
+            addNote(newNote).then((note) => {
+                props.setData((data) => [note, ...data]);
+                console.log('created');
+            }).catch(error => {
+                console.error('Error creating note:', error);
+            });
         } else if (props.note.title !== _title || props.note.description !== _description || props.note.color !== color) {
-            const isUpdated = await updateNote(props.note.id, newNote);
-            if (isUpdated) {
-                props.setData((notes) => {
-                    const indexOfNoteToUpdate = notes.findIndex((note) => note.id === props.note.id);
-                    const updatedNote = { ...notes[indexOfNoteToUpdate], title: _title, description: _description, color: color }
-                    const updatedNotes = [...notes];
-                    updatedNotes[indexOfNoteToUpdate] = updatedNote;
-                    return updatedNotes;
-                })
-                console.log('updated');
-            }
+            updateNote(props.note.id, newNote).then((isUpdated) => {
+                if (isUpdated) {
+                    props.setData((notes) => {
+                        const indexOfNoteToUpdate = notes.findIndex((note) => note.id === props.note.id);
+                        const updatedNote = { ...notes[indexOfNoteToUpdate], title: _title, description: _description, color: color }
+                        const updatedNotes = [...notes];
+                        updatedNotes[indexOfNoteToUpdate] = updatedNote;
+                        return updatedNotes;
+                    })
+                    console.log('updated');
+                }
+            }).catch(error => {
+                console.error('Error updating note:', error);
+            });
         }
 
         setTitle('');
