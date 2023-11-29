@@ -5,7 +5,7 @@ export default GlobalVarContext;
 
 export const GlobalVarProvider = ({ children }) => {
     const [alert, setAlert] = useState(null);
-    const [loadingNotes, setLoadingNotes] = useState(66);
+    const [loadingNotes, setLoadingNotes] = useState(0);
     const showAlert = (message, type) => {
         setAlert({
             msg: message,

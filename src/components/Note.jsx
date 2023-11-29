@@ -11,6 +11,8 @@ export default function Note(props) {
   useEffect(() => {
     if(loadingNotes===props.note.id){
       setIsLoading(true);
+    }else if(loadingNotes==="added new"){
+      setIsLoading(true);
     }else{
       setIsLoading(false);
     }

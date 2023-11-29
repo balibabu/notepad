@@ -1,9 +1,11 @@
 import { addNote, updateNote } from "../../services/noteServices";
 
 export default function SaveNote(props, newNote, setLoadingNotes) {
-    setLoadingNotes(newNote.id);
-
-
+    if(newNote.id===undefined){
+        setLoadingNotes("added new");
+      }else{
+          setLoadingNotes(newNote.id);
+      }
     if (props.mode === 'create') {
         addNote(newNote).then((note) => {
             props.setData((data) => [note, ...data]);
@@ -22,5 +24,7 @@ export default function SaveNote(props, newNote, setLoadingNotes) {
                 })
             }
         })
+    } else {
+        setLoadingNotes(0);
     }
 }

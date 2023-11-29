@@ -8,7 +8,7 @@ function NotesList() {
     const [data, setData] = useState(dummyData);
     const [editorMode, setEditorMode] = useState(false);
     const [mode, setMode] = useState('create');
-    const [note, setNote] = useState({ title: "Take Note", description: "", color: "#96ffff" });
+    const [note, setNote] = useState({title: "Take Note", description: "", color: "#96ffff" });
 
     useEffect(() => {
         const fetchData = async () => {
