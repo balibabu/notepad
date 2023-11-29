@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/notepad/static/js/main.6d34a69d.js",
+    "main.js": "/notepad/static/js/main.1f3b833e.js",
     "static/js/787.1d26515f.chunk.js": "/notepad/static/js/787.1d26515f.chunk.js",
     "static/media/delete.png": "/notepad/static/media/delete.69701ebce57bb26eb5ba.png",
     "index.html": "/notepad/index.html",
-    "main.6d34a69d.js.map": "/notepad/static/js/main.6d34a69d.js.map",
+    "main.1f3b833e.js.map": "/notepad/static/js/main.1f3b833e.js.map",
     "787.1d26515f.chunk.js.map": "/notepad/static/js/787.1d26515f.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6d34a69d.js"
+    "static/js/main.1f3b833e.js"
   ]
 }
