@@ -4,5 +4,7 @@ p{
     color:rgb(64, 220, 220);
     font-weight: bolder;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 100;
+    font-family: Arial, Helvetica, sans-serif;
     
 }
