@@ -1,14 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Note from "./Note";
 import { deleteNote, getAllNotes } from "../services/noteServices";
 import Editor from "./Editor/Editor";
+import GlobalVarContext from "../GlobalVariables";
+import DummyLoadingNote from "./utility/DummyLoadingNote";
+import currentDateToColor from "./utility/RandomColor";
 
 const dummyData = [{ id: 0, title: "Example", description: "Example description", created_time: "" }, { id: 1, title: "Example", description: "Example description", created_time: "" }]
+const newNote={ title: "Take Note", description: "", color: currentDateToColor() }
 function NotesList() {
     const [data, setData] = useState(dummyData);
     const [editorMode, setEditorMode] = useState(false);
     const [mode, setMode] = useState('create');
-    const [note, setNote] = useState({title: "Take Note", description: "", color: "#96ffff" });
+    const [note, setNote] = useState(newNote);
+
+    const { loadingNotes } = useContext(GlobalVarContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,7 +52,7 @@ function NotesList() {
     }
 
     const set_defaults = () => {
-        setNote({ title: "Take Note", description: "", color: "#96ffff" });
+        setNote(newNote);
         setMode('create');
         setEditorMode(false);
 
@@ -54,20 +60,22 @@ function NotesList() {
 
 
     return (
-        <>{editorMode ?
-            <Editor setEditorMode={setEditorMode} mode={mode} note={note} set_defaults={set_defaults} setData={setData} />
-            :
-            <>
-                <div>
-                    <button style={floatingButtonStyle} onClick={() => setEditorMode(true)}>Create Note</button>
-                </div>
-                <div>
-                    {data.map((note) => {
-                        return <Note note={note} key={note.id} delete_note={delete_note} on_note_click={on_note_click} />
-                    })}
-                </div>
-            </>
-        }
+        <>
+            {loadingNotes==="added new" && <DummyLoadingNote />}
+            {editorMode ?
+                <Editor setEditorMode={setEditorMode} mode={mode} note={note} set_defaults={set_defaults} setData={setData} />
+                :
+                <>
+                    <div>
+                        <button style={floatingButtonStyle} onClick={() => setEditorMode(true)}>Create Note</button>
+                    </div>
+                    <div>
+                        {data.map((note) => {
+                            return <Note note={note} key={note.id} delete_note={delete_note} on_note_click={on_note_click} />
+                        })}
+                    </div>
+                </>
+            }
         </>
     );
 }
