@@ -55,7 +55,7 @@ export default function Note(props) {
 
   return (
     <div style={noteStyle} onClick={() => props.on_note_click(props.note)}>
-      {isLoading && <img src={loadingImg} style={loadingImgStyle}/>}
+      {isLoading && <><img src={loadingImg} style={loadingImgStyle}/><style>{keyFrames}</style></>}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h3 style={{ padding: '0px', margin: '0' }}>{props.note.title}</h3>
         <button style={deleteButtonStyle} onClick={(event) => props.delete_note(event, props.note.id)}>
@@ -81,5 +81,16 @@ const loadingImgStyle={
   width:"50px",
   height:"50px",
   position: 'absolute',
-  marginLeft:"130px"
+  marginLeft:"130px",
+  animation: 'loadingImg-spin infinite 2.5s linear',
+
 }
+
+const keyFrames = `@keyframes loadingImg-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}`
