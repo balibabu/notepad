@@ -32,12 +32,13 @@ export default function Note(props) {
 
   const noteStyle = {
     display: "inline-block",
-    margin: "5px",
+    margin: "5px 0px",
+    marginLeft: "15px",
     padding: "20px",
     border: "1px solid rgb(100, 100, 100)",
     borderRadius: "10px",
     backgroundColor: props.note.color,
-    width: isSmallScreen ? "360px" : "315px",
+    width: isSmallScreen ? "80%" : "20%",
     opacity:isLoading && "50%"
   };
 
@@ -56,7 +57,7 @@ export default function Note(props) {
     <div style={noteStyle} onClick={() => props.on_note_click(props.note)}>
       {isLoading && <img src={loadingImg} style={loadingImgStyle}/>}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h3 style={{ padding: '0px', margin: '0' }}>{shortenTexts(props.note.title,15)}</h3>
+        <h3 style={{ padding: '0px', margin: '0' }}>{props.note.title}</h3>
         <button style={deleteButtonStyle} onClick={(event) => props.delete_note(event, props.note.id)}>
           <img src={deleteImg} alt="Delete" style={deleteImageStyle} />
         </button>
