@@ -13,14 +13,15 @@ export const GlobalVarProvider = ({ children }) => {
         })
         setTimeout(() => {
             setAlert(null);
-        }, 1500);
+        }, 2000);
     }
 
     const contextData = {
         alert,
         showAlert,
         loadingNotes,
-        setLoadingNotes
+        setLoadingNotes,
+        AlertDialog
     }
     return (
         <GlobalVarContext.Provider value={contextData}>
@@ -29,3 +30,29 @@ export const GlobalVarProvider = ({ children }) => {
     );
 
 }
+
+
+export function AlertDialog(props) {
+    const type={
+        danger:"pink",
+        sucess:"#06d6a0",
+        warning:"yellow",
+        info:"blue"
+    }
+    const alertStyle = {
+        backgroundColor: type[props.type],
+        padding: "1px 20px",
+        margin: "10px 20px",
+        fontWeight: "bold",
+        borderRadius: "20px",
+        fontSize: "18px"
+    }
+    return (
+        <div style={alertStyle}>
+            <p>{props.msg}</p>
+        </div>
+    )
+}
+
+
+

@@ -7,14 +7,14 @@ import DummyLoadingNote from "./utility/DummyLoadingNote";
 import currentDateToColor from "./utility/RandomColor";
 
 const dummyData = [{ id: 0, title: "Example", description: "Example description", created_time: "" }, { id: 1, title: "Example", description: "Example description", created_time: "" }]
-const newNote={ title: "Take Note", description: "", color: currentDateToColor() }
+const newNote = { title: "Take Note", description: "", color: currentDateToColor() }
 function NotesList() {
     const [data, setData] = useState(dummyData);
     const [editorMode, setEditorMode] = useState(false);
     const [mode, setMode] = useState('create');
     const [note, setNote] = useState(newNote);
 
-    const { loadingNotes } = useContext(GlobalVarContext);
+    const { loadingNotes, alert, showAlert, AlertDialog } = useContext(GlobalVarContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +36,7 @@ function NotesList() {
             const isDeleted = await deleteNote(id);
             if (isDeleted) {
                 setData((prevData) => prevData.filter((note) => note.id !== id));
+                showAlert('note with id '+id+' deleted','danger');
             } else {
                 console.log('Failed to delete note.');
             }
@@ -61,15 +62,16 @@ function NotesList() {
 
     return (
         <>
-            {loadingNotes==="added new" && <DummyLoadingNote />}
             {editorMode ?
-                <Editor setEditorMode={setEditorMode} mode={mode} note={note} set_defaults={set_defaults} setData={setData} />
+                <Editor setEditorMode={setEditorMode} mode={mode} note={note} set_defaults={set_defaults} setData={setData} showAlert={showAlert}/>
                 :
                 <>
+                    {alert && <AlertDialog msg={alert.msg} type={alert.type}/>}
                     <div>
                         <button style={floatingButtonStyle} onClick={() => setEditorMode(true)}>Create Note</button>
                     </div>
                     <div>
+                        {loadingNotes === "added new" && <DummyLoadingNote />}
                         {data.map((note) => {
                             return <Note note={note} key={note.id} delete_note={delete_note} on_note_click={on_note_click} />
                         })}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import NotesList from './NotesList'
+import NotesList from '../NotesList'
 import EditNote from './Editor';
 import CreateNote from './CreateNote';
 

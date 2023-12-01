@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addNote } from '../services/noteServices';
+import { addNote } from '../../services/noteServices';
 
 export default function CreateNote(props) {
     const noteStyle = {

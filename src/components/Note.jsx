@@ -37,7 +37,8 @@ export default function Note(props) {
     borderRadius: "10px",
     backgroundColor: props.note.color,
     width: isSmallScreen ? "80%" : "20%",
-    opacity: isLoading && "50%"
+    opacity: isLoading && "50%",
+    // position: 'relative',
   };
 
   const deleteImageStyle = {
@@ -86,7 +87,7 @@ const loadingImgStyle = {
   width: "50px",
   height: "50px",
   position: 'absolute',
-  marginLeft: "130px",
+  marginLeft: "125px",
   animation: 'loadingImg-spin infinite 2.5s linear',
 
 }

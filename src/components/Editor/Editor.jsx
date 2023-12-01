@@ -25,7 +25,7 @@ export default function Editor(props) {
                 description: description,
                 color: color
             };
-            SaveNote(props,newNote,setLoadingNotes);
+            SaveNote(props,newNote,setLoadingNotes,props.showAlert);
         }
         setTitle('');
         setDescription('');

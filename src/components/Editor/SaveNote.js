@@ -1,6 +1,6 @@
 import { addNote, updateNote } from "../../services/noteServices";
 
-export default function SaveNote(props, newNote, setLoadingNotes) {
+export default function SaveNote(props, newNote, setLoadingNotes,showAlert) {
     if(newNote.id===undefined){
         setLoadingNotes("added new");
       }else{
@@ -10,6 +10,7 @@ export default function SaveNote(props, newNote, setLoadingNotes) {
         addNote(newNote).then((note) => {
             props.setData((data) => [note, ...data]);
             setLoadingNotes(0);
+            showAlert("new note added","sucess");
         })
     } else if (newNote.description !== props.note.description || newNote.color !== props.note.color) {
         updateNote(props.note.id, newNote).then((isUpdated) => {
